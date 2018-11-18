@@ -1,0 +1,33 @@
+service: byteconf-healthchecks # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  root:
+    handler: handler.simple
+    environment:
+      URL: "https://www.byteconf.com/"
+    events:
+      - schedule: rate(10 minutes)
+  blog:
+    handler: handler.simple
+    environment:
+      URL: "https://blog.byteconf.com"
+    events:
+      - schedule: rate(10 minutes)
+  patrons:
+    handler: handler.text
+    environment:
+      TEXT: "We ♥ our patrons!"
+      URL: "https://www.byteconf.com/patrons"
+    events:
+      - schedule: rate(10 minutes)
+  sponsor:
+    handler: handler.text
+    environment:
+      TEXT: "Sponsor Byteconf"
+      URL: "https://www.byteconf.com/sponsor"
+    events:
+      - schedule: rate(10 minutes)
